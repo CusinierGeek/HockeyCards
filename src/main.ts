@@ -218,6 +218,7 @@ const ajoutOuverture = (cardDiv: HTMLElement) => {
                 card.setAttribute("style", "display: none");
             }
         });
+        initForm(this);
         if (!smallMedia.matches) {
             const openCard = document.querySelector(".card-open");
             const cardWidth = this.offsetWidth / 2;
@@ -226,10 +227,10 @@ const ajoutOuverture = (cardDiv: HTMLElement) => {
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
             // Calcul de la position à laquelle la carte doit être déplacée pour être centrée
+
             const x = windowWidth / 2 - cardWidth - cord.left;
             const y = windowHeight / 2 - cardHeight - cord.top;
             this.style.transform = `translateX(${x}px) translateY(${y}px) scale(2,2) `;
-            initForm(this);
             this.classList.add("card-open");
             this.firstElementChild?.classList.remove("hover-effect");
             this.style.zIndex = "70";

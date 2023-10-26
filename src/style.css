@@ -506,7 +506,6 @@ header {
         justify-content: center !important;
         margin: 1rem auto;
         width: 100vw;
-       
     }
     #search-input {
         margin-top: 20px;
@@ -516,10 +515,12 @@ header {
     }
 }
 
-@media (max-width: 425px) {
-   switch-button {
-       width: 100vw;
-       margin-left: 0;
-   }
+@media (max-width: 610px) {
+    header {
+        width: 80vw;
+    }
+    switch-button {
+        width: 80%;
+        margin-left: 0;
+    }
 }
-
