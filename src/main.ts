@@ -2,6 +2,8 @@ import "./style.css";
 //Récupération des éléments du DOM
 const addButton = document.querySelector(".add-card") as HTMLButtonElement;
 
+const smallMedia = window.matchMedia("(max-width: 768px)");
+
 class Card {
     id: string;
     position: string;
@@ -216,26 +218,28 @@ const ajoutOuverture = (cardDiv: HTMLElement) => {
                 card.setAttribute("style", "display: none");
             }
         });
-        const openCard = document.querySelector(".card-open");
-        const cardWidth = this.offsetWidth / 2;
-        const cardHeight = this.offsetHeight / 2;
-        const cord = this.getBoundingClientRect(); // position de la carte
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        // Calcul de la position à laquelle la carte doit être déplacée pour être centrée
-        const x = windowWidth / 2 - cardWidth - cord.left;
-        const y = windowHeight / 2 - cardHeight - cord.top;
-        this.style.transform = `translateX(${x}px) translateY(${y}px) scale(2,2) `;
-        initForm(this);
-        this.classList.add("card-open");
-        this.firstElementChild?.classList.remove("hover-effect");
-        this.style.zIndex = "70";
-        // Ferme la carte ouverte si une autre carte est cliquée
-        if (openCard && openCard != this) {
-            openCard.classList.remove("card-open");
-            openCard.setAttribute("style", "transform: translateX(0px) translateY(0px) scale(1,1)");
-            openCard.firstElementChild?.classList.add("hover-effect");
-            openCard.setAttribute("style", "z-index: 60");
+        if (!smallMedia.matches) {
+            const openCard = document.querySelector(".card-open");
+            const cardWidth = this.offsetWidth / 2;
+            const cardHeight = this.offsetHeight / 2;
+            const cord = this.getBoundingClientRect(); // position de la carte
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            // Calcul de la position à laquelle la carte doit être déplacée pour être centrée
+            const x = windowWidth / 2 - cardWidth - cord.left;
+            const y = windowHeight / 2 - cardHeight - cord.top;
+            this.style.transform = `translateX(${x}px) translateY(${y}px) scale(2,2) `;
+            initForm(this);
+            this.classList.add("card-open");
+            this.firstElementChild?.classList.remove("hover-effect");
+            this.style.zIndex = "70";
+            // Ferme la carte ouverte si une autre carte est cliquée
+            if (openCard && openCard != this) {
+                openCard.classList.remove("card-open");
+                openCard.setAttribute("style", "transform: translateX(0px) translateY(0px) scale(1,1)");
+                openCard.firstElementChild?.classList.add("hover-effect");
+                openCard.setAttribute("style", "z-index: 60");
+            }
         }
     });
 };
